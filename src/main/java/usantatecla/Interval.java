@@ -1,5 +1,7 @@
 package usantatecla;
 
+import java.util.function.BooleanSupplier;
+
 public class Interval {
 
 	private Min min;
@@ -12,7 +14,7 @@ public class Interval {
 	}
 
 	public boolean include(double value) {
-			return this.min.isWithin(value) && this.max.isWithin(value);
+		return this.min.isWithin(value) && this.max.isWithin(value);
 	}
 
 	@Override
@@ -49,6 +51,10 @@ public class Interval {
 	@Override
 	public String toString() {
 		return this.min.toString() + ", " + max.toString();
-	}	
+	}
+
+	public BooleanSupplier isOverlapping() {
+		return null;
+	}
 
 }

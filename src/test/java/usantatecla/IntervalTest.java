@@ -7,13 +7,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class IntervalTest {
-  
+
   private Point left = new Point(-2.2);
   private Point right = new Point(4.4);
   private IntervalBuilder intervalBuilder;
 
   @BeforeEach
-  public void before(){
+  public void before() {
     this.left = new Point(-2.2);
     this.right = new Point(4.4);
     this.intervalBuilder = new IntervalBuilder();
@@ -64,6 +64,12 @@ public class IntervalTest {
     assertTrue(interval.include(right.getLess()));
     assertTrue(interval.include(right.getEquals()));
     assertFalse(interval.include(right.getGreater()));
+  }
+
+  @Test
+  public void givenIntervalsClosedClosedAndIsOverlappingThenOk() {
+    Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
+    assertTrue(interval.isOverlapping());
   }
 
 }
