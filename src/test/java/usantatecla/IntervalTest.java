@@ -1,10 +1,13 @@
 package usantatecla;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public class IntervalTest {
 
@@ -73,11 +76,7 @@ public class IntervalTest {
   }
 
   @Test
-  public void givenIntervalClosedClosedWhenIncludeClosedClosedIsOverlappingThenFalse() {
-    Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
-    Interval otherInterval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
-
-    assertFalse(interval.isOverlapping(otherInterval));
+  public void givenIntervalClosedClosedNullWhenCreateIntervalThenTrue() {
+    Assertions.assertThrows(AssertionError.class, () -> this.intervalBuilder.build());
   }
-
 }
