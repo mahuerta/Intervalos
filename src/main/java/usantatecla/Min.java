@@ -4,12 +4,16 @@ public class Min {
 
   protected double value;
 
-	public Min(double value) {
+  public Min(double value) {
     this.value = value;
   }
 
-	public boolean isWithin(double value) {
-      return this.value < value;
+  public boolean isWithin(double value) {
+    return this.value < value;
+  }
+
+  public Double getValue() {
+    return this.value;
   }
 
   @Override
@@ -35,10 +39,10 @@ public class Min {
       return false;
     return true;
   }
-  
+
   @Override
-	public String toString() {
-		return "(" + this.value;
-	}	
-  
+  public String toString() {
+    return "(" + this.value;
+  }
+
 }

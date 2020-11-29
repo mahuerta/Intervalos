@@ -56,8 +56,9 @@ public class Interval {
 	public Boolean isOverlapping(Interval otherInterval) {
 		if (otherInterval == null)
 			return false;
-		return ((this.max == null) || (otherInterval.min == null))
-				&& ((this.min == null) || (otherInterval.max == null));
+		return ((this.max == null) || (otherInterval.min == null) || (this.max.isWithin(otherInterval.min.getValue())))
+				&& ((this.min == null) || (otherInterval.max == null)
+						|| (this.min.isWithin(otherInterval.max.getValue())));
 	}
 
 }
