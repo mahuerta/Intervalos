@@ -67,9 +67,9 @@ public class IntervalTest {
   }
 
   @Test
-  public void givenIntervalsClosedClosedAndIsOverlappingThenOk() {
+  public void givenIntervalsClosedClosedWhenIncludeNullIsOverlappingThenFalse() {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
-    assertTrue(interval.isOverlapping());
+    assertFalse(interval.isOverlapping(null));
   }
 
 }

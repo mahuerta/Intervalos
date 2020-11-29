@@ -53,7 +53,9 @@ public class Interval {
 		return this.min.toString() + ", " + max.toString();
 	}
 
-	public BooleanSupplier isOverlapping() {
+	public Boolean isOverlapping(Interval otherInterval) {
+		if (otherInterval == null)
+			return false;
 		return null;
 	}
 
