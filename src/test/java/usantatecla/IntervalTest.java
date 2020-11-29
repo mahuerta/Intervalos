@@ -142,4 +142,17 @@ public class IntervalTest {
     Interval otherInterval = new IntervalBuilder().open(left.getEquals() - 1).open(left.getEquals()).build();
     assertFalse(interval.isOverlapping(otherInterval));
   }
+
+  /**
+   * 
+   * Case: -----[----)------
+   * 
+   * ------(----]-----
+   */
+  @Test
+  public void givenIntervalsClosedOpenWhenIncludeOpenClosedIsOverlappingSamePointThenTrue() {
+    Interval interval = this.intervalBuilder.closed(left.getEquals()).open(right.getEquals()).build();
+    Interval otherInterval = new IntervalBuilder().open(left.getEquals() - 1).closed(left.getEquals()).build();
+    assertTrue(interval.isOverlapping(otherInterval));
+  }
 }
