@@ -78,10 +78,42 @@ public class IntervalTest {
     Assertions.assertThrows(AssertionError.class, () -> this.intervalBuilder.build());
   }
 
+  /**
+   * 
+   * Case: -----[----]------
+   * 
+   * --------------[----]-----
+   */
   @Test
   public void givenIntervalsClosedClosedWhenIncludeClosedClosedIsOverlappingThenTrue() {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().closed(left.getGreater()).closed(right.getGreater()).build();
     assertTrue(interval.isOverlapping(otherInterval));
+  }
+
+  /**
+   * 
+   * Case: -----(----)------
+   * 
+   * --------------(----)-----
+   */
+  @Test
+  public void givenIntervalsClosedClosedWhenIncludeOpenOpenIsOverlappingThenTrue() {
+    Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
+    Interval otherInterval = new IntervalBuilder().open(left.getGreater()).open(right.getGreater()).build();
+    assertTrue(interval.isOverlapping(otherInterval));
+  }
+
+  /**
+   * 
+   * Case: -----(----)------
+   * 
+   * -------------------(----)-----
+   */
+  @Test
+  public void givenIntervalsOpenClosedWhenIncludeCloseOpenIsOverlappingThenTrue() {
+    Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
+    Interval otherInterval = new IntervalBuilder().open(right.getGreater()).open(right.getGreater() + 1).build();
+    assertFalse(interval.isOverlapping(otherInterval));
   }
 }

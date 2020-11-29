@@ -1,7 +1,5 @@
 package usantatecla;
 
-import java.util.function.BooleanSupplier;
-
 public class Interval {
 
 	private Min min;
@@ -57,6 +55,7 @@ public class Interval {
 		if (otherInterval == null)
 			return false;
 		return ((this.max == null) || (otherInterval.min == null) || (this.max.isWithin(otherInterval.min.getValue())))
+
 				&& ((this.min == null) || (otherInterval.max == null)
 						|| (this.min.isWithin(otherInterval.max.getValue())));
 	}
