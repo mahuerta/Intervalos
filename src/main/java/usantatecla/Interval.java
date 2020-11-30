@@ -56,7 +56,10 @@ public class Interval {
 			return false;
 
 		return (this.max.isWithin(otherInterval.min.getValue()) && otherInterval.min.isWithin(this.max.getValue()))
-				&& (this.min.isWithin(otherInterval.max.getValue()) && otherInterval.max.isWithin(this.min.getValue()));
+				&& (this.min.isWithin(otherInterval.max.getValue()) && otherInterval.max.isWithin(this.min.getValue()))
+				&& !((this.min.isWithin(otherInterval.min.getValue())
+						&& (this.max.isWithin(otherInterval.max.getValue())))
+						|| (otherInterval.min.isWithin(this.min.getValue())
+								&& (otherInterval.max.isWithin(this.max.getValue()))));
 	}
-
 }

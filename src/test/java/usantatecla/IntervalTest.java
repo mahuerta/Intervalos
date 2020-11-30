@@ -170,8 +170,8 @@ public class IntervalTest {
   public void givenIntervalsClosedClosedWhenIncludeOpenOpenIsOverlappingSamePointThenFalse() {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).open(right.getGreater()).build();
     Interval otherInterval = new IntervalBuilder().closed(left.getEquals()).open(right.getEquals()).build();
-    assertTrue(interval.isIntersected(otherInterval));
-    assertTrue(otherInterval.isIntersected(interval));
+    assertFalse(interval.isIntersected(otherInterval));
+    assertFalse(otherInterval.isIntersected(interval));
   }
 
   /**
