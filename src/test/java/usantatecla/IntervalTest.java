@@ -201,4 +201,28 @@ public class IntervalTest {
     assertFalse(otherInterval.isIntersected(interval));
   }
 
+  /**
+   * Case: -----(---------)------
+   * 
+   * -------------(----)-----
+   */
+  @Test
+  public void givenIntervalsOpenOpenWhenIncludeOpenOpenIsOverlappingContainerThenFalse() {
+    Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
+    Interval otherInterval = new IntervalBuilder().open(left.getGreater()).open(right.getLess()).build();
+    assertFalse(interval.isIntersected(otherInterval));
+    assertFalse(otherInterval.isIntersected(interval));
+  }
+
+  /**
+   * Case: -----(---------)------
+   * 
+   * -----------(----)-----
+   */
+
+  /**
+   * Case: -----(---------)------
+   * 
+   * -----------[-----------)-----
+   */
 }
