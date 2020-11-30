@@ -89,6 +89,7 @@ public class IntervalTest {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().closed(left.getGreater()).closed(right.getGreater()).build();
     assertTrue(interval.isIntersected(otherInterval));
+    assertTrue(otherInterval.isIntersected(interval));
   }
 
   /**
@@ -102,6 +103,7 @@ public class IntervalTest {
     Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().open(left.getGreater()).open(right.getGreater()).build();
     assertTrue(interval.isIntersected(otherInterval));
+    assertTrue(otherInterval.isIntersected(interval));
   }
 
   /**
@@ -111,23 +113,11 @@ public class IntervalTest {
    * -------------------(----)-----
    */
   @Test
-  public void givenIntervalsOpenClosedWhenIncludeCloseOpenIsOverlappingThenTrue() {
+  public void givenIntervalsOpenClosedWhenIncludeCloseOpenIsOverlappingThenFalse() {
     Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().open(right.getGreater()).open(right.getGreater() + 1).build();
     assertFalse(interval.isIntersected(otherInterval));
-  }
-
-  /**
-   * 
-   * Case: -----(----)------
-   * 
-   * ---(----)-----
-   */
-  @Test
-  public void givenIntervalsOpenOpenWhenIncludeOpenOpenIsOverlappingThenTrue() {
-    Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
-    Interval otherInterval = new IntervalBuilder().open(left.getLess() - 1).open(left.getLess()).build();
-    assertFalse(interval.isIntersected(otherInterval));
+    assertFalse(otherInterval.isIntersected(interval));
   }
 
   /**
@@ -137,10 +127,11 @@ public class IntervalTest {
    * ------(----)-----
    */
   @Test
-  public void givenIntervalsOpenOpenWhenIncludeOpenOpenIsOverlappingSamePointThenTrue() {
+  public void givenIntervalsOpenOpenWhenIncludeOpenOpenIsOverlappingSamePointThenFalse() {
     Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().open(left.getEquals() - 1).open(left.getEquals()).build();
     assertFalse(interval.isIntersected(otherInterval));
+    assertFalse(otherInterval.isIntersected(interval));
   }
 
   /**
@@ -154,20 +145,20 @@ public class IntervalTest {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).open(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().open(left.getEquals() - 1).closed(left.getEquals()).build();
     assertTrue(interval.isIntersected(otherInterval));
+    assertTrue(otherInterval.isIntersected(interval));
   }
 
   /**
    * 
-   * Case: -----[----)------SI
+   * Case: -----[----)------
    * 
-   * ------(----)-----nO
+   * ------(----)-----
    */
   @Test
-  public void givenIntervalsClosedOpenWhenIncludeOpenOpenIsOverlappingSamePointThenTrue() {
+  public void givenIntervalsClosedOpenWhenIncludeOpenOpenIsOverlappingSamePointThenFalse() {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).open(right.getEquals()).build();
     Interval otherInterval = new IntervalBuilder().open(left.getEquals() - 1).open(left.getEquals()).build();
-    assertTrue(interval.isIntersected(otherInterval));
+    assertFalse(interval.isIntersected(otherInterval));
     assertFalse(otherInterval.isIntersected(interval));
-
   }
 }

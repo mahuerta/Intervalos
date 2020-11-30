@@ -54,10 +54,9 @@ public class Interval {
 	public Boolean isIntersected(Interval otherInterval) {
 		if (otherInterval == null)
 			return false;
-		return ((this.max == null) || (otherInterval.min == null) || (this.max.isWithin(otherInterval.min.getValue())))
+		return (this.max.isWithin(otherInterval.min.getValue()) && this.min.isWithin(otherInterval.max.getValue())) ||
 
-				&& ((this.min == null) || (otherInterval.max == null)
-						|| (this.min.isWithin(otherInterval.max.getValue())));
+				(otherInterval.min.isWithin(this.max.getValue()) && otherInterval.max.isWithin(this.min.getValue()));
 	}
 
 }
