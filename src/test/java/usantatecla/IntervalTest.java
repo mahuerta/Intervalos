@@ -149,7 +149,6 @@ public class IntervalTest {
   }
 
   /**
-   * 
    * Case: -----[----)------
    * 
    * ------(----)-----
@@ -161,4 +160,5 @@ public class IntervalTest {
     assertFalse(interval.isIntersected(otherInterval));
     assertFalse(otherInterval.isIntersected(interval));
   }
+
 }
