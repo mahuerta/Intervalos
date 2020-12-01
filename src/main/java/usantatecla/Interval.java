@@ -55,11 +55,28 @@ public class Interval {
 		if (otherInterval == null)
 			return false;
 
-		return (this.max.isWithin(otherInterval.min.getValue()) && otherInterval.min.isWithin(this.max.getValue()))
-				&& (this.min.isWithin(otherInterval.max.getValue()) && otherInterval.max.isWithin(this.min.getValue()))
-				&& !((this.min.isWithin(otherInterval.min.getValue())
-						&& (this.max.isWithin(otherInterval.max.getValue())))
-						|| (otherInterval.min.isWithin(this.min.getValue())
-								&& (otherInterval.max.isWithin(this.max.getValue()))));
+		return this.maxIsWithInMin(otherInterval) && this.minIsWithInMax(otherInterval)
+				&& !this.bidirectionalContains(otherInterval);
 	}
+
+	private Boolean maxIsWithInMin(Interval otherInterval) {
+		return this.max.isWithin(otherInterval.min.getValue()) && otherInterval.min.isWithin(this.max.getValue());
+	}
+
+	private Boolean minIsWithInMax(Interval otherInterval) {
+		return this.min.isWithin(otherInterval.max.getValue()) && otherInterval.max.isWithin(this.min.getValue());
+	}
+
+	private Boolean bidirectionalContains(Interval otherInterval) {
+		return (this.containsIntervalFirstInterval(otherInterval) || this.containsIntervalFirstOther(otherInterval));
+	}
+
+	private Boolean containsIntervalFirstInterval(Interval otherInterval) {
+		return this.min.isWithin(otherInterval.min.getValue()) && this.max.isWithin(otherInterval.max.getValue());
+	}
+
+	private Boolean containsIntervalFirstOther(Interval otherInterval) {
+		return otherInterval.min.isWithin(this.min.getValue()) && otherInterval.max.isWithin(this.max.getValue());
+	}
+
 }
